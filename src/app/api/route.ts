@@ -26,7 +26,7 @@ const text = (await chat).response.text()
 
 return NextResponse.json({text})
 } catch (error) {
-    console.log()
+    console.log(error)
 return NextResponse.json({text:'an error occured'})
 
 }
