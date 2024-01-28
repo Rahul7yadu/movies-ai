@@ -1,6 +1,6 @@
 # Movies-ai 
 
-[Link]("https://movies-ai-chat.vercel.app/")
+[Link](https://movies-ai-chat.vercel.app/)
 
 ## explore movies , Television shows , Actors  and Chat with your Ai Assistant to know about them.
 
