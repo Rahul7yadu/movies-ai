@@ -27,7 +27,7 @@ const InputForm = () => {
   return (
     <div className="w-full bg-slate-300 h-screen flex flex-col justify-center items-center">
     <div className="w-full flex-1 text-center">
-        {output.map((text)=><p>{text}</p>)}
+        {output.map((text,id)=><p key={id}>{text}</p>)}
     </div>
     <form onSubmit={(e)=>formHandler(e)} className="flex-1">
         <input onChange={(e)=>setText(e.target.value)}/>
