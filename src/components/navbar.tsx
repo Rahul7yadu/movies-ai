@@ -4,8 +4,8 @@ import Image from "next/image"
 import Search from "./Search"
 const Navbar = () => {
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="flex w-full justify-between p-4  min-h-14 ">
+    <nav className="sticky top-0 z-50 w-full border-b border-red-500 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="flex w-full sm:justify-between justify-evenly  p-4  min-h-14 ">
         <div className="flex justify-between gap-4 w-1/3 ">
           <Link href="/" className=" flex gap-3">
              <Image src='/logo.jpg' alt="logo" width={40} height={40} className="rounded-lg"/>
@@ -27,7 +27,9 @@ const Navbar = () => {
 }
 export default Navbar
 
+
 const NavLink = ()=>{
+
   return (
               <div className="md:flex text-lg gap-4 hidden ">
 

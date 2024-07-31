@@ -25,7 +25,7 @@ export default function RootLayout({
          disableTransitionOnChange
         >
         <Navbar/>
-        <main className='border-2 border-border'>
+        <main >
         {children}
         </main>
         </ThemeProvider>

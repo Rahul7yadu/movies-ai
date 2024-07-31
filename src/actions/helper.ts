@@ -1,5 +1,5 @@
 import { MovieData } from "@/lib/types";
-
+const apiKey = process.env.API_KEY
 type Data = {
     Response: MovieData,
     error: Error | null,
@@ -24,4 +24,20 @@ export const getMoviesByQueryAndPage = async (query: string, page: number) => {
     } catch (error) {
         throw new Error(error as string)
 }
+}
+
+
+export const getCast = async({type,id}:{type:"movie"|"tv",id:string})=>{
+ const url = type === 'movie' ? 
+ `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}` :
+  `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
+
+    setTimeout(async ()=>{
+       
+    return fetch(url).then((data)=>data.json()).then(data=>data);
+     
+    },4000)
+    // const response = await fetch(url);
+    // const data = await response.json();
+    // return data;
 }

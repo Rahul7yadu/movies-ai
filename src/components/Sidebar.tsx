@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet"
 import { ReactNode, useState } from "react"
 import { HamburgerMenuIcon } from "@radix-ui/react-icons"
-import { Cross, Crosshair, SidebarCloseIcon } from "lucide-react"
+import { SidebarCloseIcon } from "lucide-react"
 
 const Sidebar = () => {
   const router = useRouter()
@@ -59,10 +59,10 @@ const [open,setOpen] = useState(false)
   return (
 
     <Sheet onOpenChange={(open)=>setOpen(open)}>
-      <SheetTrigger>
-        {!open?<HamburgerMenuIcon fontSize={50} className="w-10 h-10" />:<SidebarCloseIcon className="w-10 h-10" />}
+      <SheetTrigger className="m-6 p-2">
+        {!open?<HamburgerMenuIcon className="w-5 h-5 text-center" />:<SidebarCloseIcon className="w-10 h-10" />}
         </SheetTrigger>
-      <SheetContent className="backdrop-blur-sm bg-background/50">
+      <SheetContent className="backdrop-blur-sm bg-background/50" onClick={()=>setOpen(open=>!open)}>
         {children}
       </SheetContent>
     </Sheet>
@@ -73,7 +73,7 @@ const SideNav = ({ pathname }: { pathname: string }) => {
   return (
 
     <div className="sm:hidden">
-      <div>
+      <div className="w-full bg-slate-50/30">
         <NavLink pathName={pathname} />
       </div>
     </div>

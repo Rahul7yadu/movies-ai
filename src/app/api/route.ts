@@ -1,10 +1,9 @@
 import { NextResponse ,NextRequest} from "next/server";
 import { GoogleGenerativeAI, } from "@google/generative-ai";
 
-export async function POST(Request:NextRequest){
+export async function POST(Request:NextRequest,Response:NextResponse){
 
 const data  = await Request.json();
-console.log(data)
 const description =  JSON.stringify(data.description)
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 // ...
@@ -21,9 +20,17 @@ Description: ${description}
 Question: ${data.question}
 `
 try {
+    const result = await model.generateContentStream(initialPrompt)
+    let text2 = "";
+    for await (const chunks of result.stream){
+        text2+=chunks.text()
+        NextResponse.json({text:text2})
+               
+    }
 const chat = model.generateContent(initialPrompt)
 const text = (await chat).response.text()
-
+const response = new NextResponse()
+response.text()
 return NextResponse.json({text})
 } catch (error) {
     console.log(error)

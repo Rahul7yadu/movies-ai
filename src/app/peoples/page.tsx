@@ -1,19 +1,18 @@
 import { PCard } from "@/components/Card";
 import { PeopleData } from "@/lib/types";
-import Sidebar from "@/components/Sidebar";
-
+import MyPagination from "@/components/Pagination";
 const baseUrl = process.env.BASE_URL+'person/popular'
 const api_key = process.env.API_KEY
-const page = async () => {
-    const response = await fetch(`${baseUrl}?api_key=${api_key}`)
+const page = async ({params}:{params:{page:string}}) => {
+    const page = params.page||"1"
+    const response = await fetch(`${baseUrl}?api_key=${api_key}&page=${page}`)
     const data:PeopleData = await response.json();
-    console.log(data)
   return (
-    <div className="flex ">
-      <Sidebar/>
+    <div className="flex flex-col">
     <div className="grid justify-items-center items-center grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 p-4">{
         data.results.map((person)=><PCard Data={person} key={person.id}/>)
     }</div>
+    <MyPagination currentPage={Number(data.page)} totalPage={Number(data.total_pages)} />
     </div>
   )
 }

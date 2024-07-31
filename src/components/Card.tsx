@@ -1,15 +1,16 @@
 import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "./ui/card"
+import { Card, } from "./ui/card"
 import { MovieResults, TvResults,PeopleResults } from "@/lib/types"
 import "./style.css"
 import Link from "next/link"
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card"
 const base_image_url = "https://image.tmdb.org/t/p/w500/"
 const MCard = ({ Data }: { Data: MovieResults }) => {
     return (
         <Link href={`/movies/${Data.id}`} >
         <Card className="cursor-pointer card w-60 h-96 border-2 border-border rounded-md relative" >
-           <Image src = {`${base_image_url}/${Data.poster_path}`} alt = "movies poster" fill className="-z-10"/>
+      {Data.poster_path?  
+        <Image src = {`${base_image_url}/${Data.poster_path}`} alt = "movies poster" fill className="-z-10"/>:
+        <Image src={'/not-found.jpg'} alt="not found"/>}
            <div className="absolute bottom-0 w-full">
             <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 

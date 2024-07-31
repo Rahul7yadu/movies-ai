@@ -58,9 +58,6 @@ export  function formatMoney(number:number) {
 }
 
 // Test the function
-console.log(formatMoney(1200));      // Output: "one thousand two hundred"
-console.log(formatMoney(1000000));   // Output: "one million"
-console.log(formatMoney(123456789));  // Output: "one hundred twenty-three million four hundred fifty-six thousand seven hundred eighty-nine"
 
 
 export const formatCurrency = (number:number) =>{

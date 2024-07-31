@@ -15,6 +15,13 @@ const page = async ({ searchParams }: {
 
     const data:SearchResponse = await response.json() 
     console.log(data)
+    if(data.results.length<1){
+        return(
+            <div className="text-2xl text-center ">
+                No Results Found...
+            </div>
+        ) 
+    }
     return (
         <div className="flex flex-col gap-8">
 

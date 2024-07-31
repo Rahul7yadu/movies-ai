@@ -3,6 +3,8 @@ import AiSummary from "@/components/AiSummary"
 import { Card, CardContent, CardFooter, CardHeader ,CardDescription,CardTitle} from "@/components/ui/card"
 import {  LinkIcon } from "lucide-react"
 import Link from "next/link"
+import { Suspense, lazy } from "react"
+import Cast from "@/components/Cast"
 const base_image_url = "https://image.tmdb.org/t/p/original"
 
 const MovieInfo = async ({ params }: { params: { tvId: string } }) => {
@@ -20,6 +22,10 @@ const MovieInfo = async ({ params }: { params: { tvId: string } }) => {
       <AiSummary Data={Data} />
       </div>
       <MovieDataSection Data={Data} />
+      <Suspense fallback={<div className="text-xl text-white">loading...</div>} >
+        {/* <CastClient type="tv" id={Data.id.toString()}/> */}
+        <Cast id={Data.id.toString()} type="tv" />
+      </Suspense>
     </div>
   )
 }

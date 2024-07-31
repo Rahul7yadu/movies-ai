@@ -2,25 +2,30 @@ import Image from "next/image"
 import AiSummary from "@/components/AiSummary"
 import { Card, CardContent, CardFooter, CardHeader ,CardDescription,CardTitle} from "@/components/ui/card"
 import { LinkIcon } from "lucide-react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import {formatCurrency} from "@/lib/helper"
 import { Separator } from "@/components/ui/separator"
+import { Suspense } from "react"
+import Cast from "@/components/Cast"
 const base_image_url = "https://image.tmdb.org/t/p/original"
 
 const MovieInfo = async ({ params }: { params: { movieId: string } }) => {
 
   const fetchResponse = await fetch(`https://api.themoviedb.org/3/movie/${params.movieId}?api_key=${process.env.API_KEY}`)
   const Data: Response = await fetchResponse.json()
-  console.log(Data)
   return (
     <div className="flex flex-col">
-      <div className="flex w-full flex-col justify-center items-center  relative gap-4">
+      <div className="flex w-full lg:flex-row flex-col justify-center relative gap-4">
         <Image src={`${base_image_url}/${Data.backdrop_path}`}
           alt="backdrop image"
-          width={1000} height={720} className=" -z-10 aspect-auto" />
+          width={1000} height={720} className=" -z-10 " />
       <AiSummary Data={Data} />
       </div>
       <MovieDataSection Data={Data} />
+      <Suspense fallback={<div className="text-xl border-border border-4">"....Loading"</div>}>
+        <Cast id={Data.id.toString()} type="movie"/>
+      </Suspense>
     </div>
   )
 }
@@ -39,19 +44,20 @@ const MovieDataSection = ({ Data }: { Data: Response }) => {
         </CardDescription>
       </CardHeader>
       <CardContent>
+      <Image src={`${base_image_url}${Data.poster_path}`} alt="poster" width="300" height="600" />
         {Data.overview}
      <Separator className="my-2 h-2 w-full"/> 
       </CardContent>
       <CardFooter className="flex gap-4 flex-wrap">
         <Link href={Data.homepage}>
-          Link<LinkIcon />
+        <LinkIcon color="blue"/>
         </Link>
         <div>
           Average Vote : {Data.vote_average}
         </div>
         <Separator orientation="vertical" className="w-1 h-4"/>
         <div>
-        Total_Budget :  {Data.budget} Million
+        Total_Budget :  {Data.budget} 
         </div>
         <Separator orientation="vertical" className="w-1 h-4"/>
          <div className="flex gap-2 ">
@@ -67,7 +73,7 @@ const MovieDataSection = ({ Data }: { Data: Response }) => {
         </div>
         <Separator orientation="vertical" className="w-1 h-4"/>
         <div>
-          Total Revenue : {formatCurrency(Data.revenue)} Million
+          Total Revenue : {formatCurrency(Data.revenue)} 
         </div>
         <div>
 
