@@ -23,7 +23,7 @@ const MovieInfo = async ({ params }: { params: { movieId: string } }) => {
       <AiSummary Data={Data} />
       </div>
       <MovieDataSection Data={Data} />
-      <Suspense fallback={<div className="text-xl border-border border-4">"....Loading"</div>}>
+      <Suspense fallback={<div className="text-xl border-border border-4">....Loading</div>}>
         <Cast id={Data.id.toString()} type="movie"/>
       </Suspense>
     </div>

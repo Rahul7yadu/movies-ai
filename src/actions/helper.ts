@@ -32,12 +32,8 @@ export const getCast = async({type,id}:{type:"movie"|"tv",id:string})=>{
  `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}` :
   `https://api.themoviedb.org/3/tv/${id}/credits?api_key=${apiKey}`
 
-    setTimeout(async ()=>{
-       
-    return fetch(url).then((data)=>data.json()).then(data=>data);
-     
-    },4000)
-    // const response = await fetch(url);
-    // const data = await response.json();
-    // return data;
+   const response = await  fetch(url)
+
+   return await response.json()
+   
 }
